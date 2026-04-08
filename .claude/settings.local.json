@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(git add:*)",
-      "Bash(git commit -m 'chore: Update vercel configuration for production:*)"
+      "Bash(git commit -m 'chore: Update vercel configuration for production:*)",
+      "Bash(git push:*)",
+      "Bash(git commit -m 'chore: Update configuration files:*)"
     ]
   }
 }
