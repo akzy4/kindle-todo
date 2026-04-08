@@ -11,6 +11,12 @@ interface Todo {
   updatedAt: string;
 }
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || '';
+
+const apiClient = axios.create({
+  baseURL: API_BASE_URL
+});
+
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [title, setTitle] = useState('');
@@ -25,7 +31,7 @@ function App() {
   const fetchTodos = async () => {
     try {
       setError('');
-      const response = await axios.get('/api/todos');
+      const response = await apiClient.get('/api/todos');
       setTodos(response.data);
     } catch (err) {
       setError('TODOの取得に失敗しました');
@@ -44,7 +50,7 @@ function App() {
     try {
       setLoading(true);
       setError('');
-      const response = await axios.post('/api/todos', {
+      const response = await apiClient.post('/api/todos', {
         title: title.trim(),
         description: description.trim() || undefined
       });
@@ -62,7 +68,7 @@ function App() {
   const handleToggleTodo = async (id: string, completed: boolean) => {
     try {
       setError('');
-      const response = await axios.patch(`/api/todos/${id}`, {
+      const response = await apiClient.patch(`/api/todos/${id}`, {
         completed: !completed
       });
       setTodos(todos.map(t => t.id === id ? response.data : t));
@@ -75,7 +81,7 @@ function App() {
   const handleDeleteTodo = async (id: string) => {
     try {
       setError('');
-      await axios.delete(`/api/todos/${id}`);
+      await apiClient.delete(`/api/todos/${id}`);
       setTodos(todos.filter(t => t.id !== id));
     } catch (err) {
       setError('TODOの削除に失敗しました');
