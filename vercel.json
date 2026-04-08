@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "if [ -f frontend/package.json ]; then npm --prefix frontend run build -- --outDir ../dist; else npm run build -- --outDir dist; fi",
-  "outputDirectory": "dist",
+  "buildCommand": "npm run build -w frontend",
+  "outputDirectory": "frontend/dist",
   "installCommand": "npm install",
   "rewrites": [
     { "source": "/api/todos/:id", "destination": "/api/todos?id=:id" },
