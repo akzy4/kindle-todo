@@ -1,8 +1,7 @@
 {
   "version": 2,
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "frontend/dist",
+  "buildCommand": "if [ -f frontend/package.json ]; then npm --prefix frontend run build -- --outDir ../dist; else npm run build -- --outDir dist; fi",
+  "outputDirectory": "dist",
   "installCommand": "npm install",
   "rewrites": [
     { "source": "/api/todos/:id", "destination": "/api/todos?id=:id" },
